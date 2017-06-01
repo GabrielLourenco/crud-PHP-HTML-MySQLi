@@ -22,7 +22,7 @@ function inserirUsuario(){
         'email' => $_POST['email'],
         'idade' => $_POST['idade'],
         'status' => $_POST['status'],
-        'senha' => md5($_POST['senha'])
+        'senha' => criptySenha($_POST['senha'])
       );
 
       $grava = DBCreate('clientes',$usuario);
@@ -43,7 +43,7 @@ function alterarUsuario(){
         'email' => $_POST['email'],
         'idade' => $_POST['idade'],
         'status' => $_POST['status'],
-        'senha' => md5($_POST['senha'])
+        'senha' => criptySenha($_POST['senha'])
       );
 
       $altera = DBUpdate('clientes', $usuario, 'id='.$_POST['id']);
