@@ -10,6 +10,7 @@ $usuario = getUsuarioID($_POST['id']);
 <label>Email:</label><input type="email" name="email" value="<?=$usuario['email']?>" />
 <label>Idade:</label><input type="number" name="idade" value="<?=$usuario['idade']?>" />
 <label>Status:</label><input type="number" name="status" value="<?=$usuario['status']?>" />
+<label>Senha:</label><input type="password" name="senha" value="" />
 <input type="hidden" value="<?=$usuario['id']?>" name="id" />
 <input type="hidden" value="alterar" name="acao" />
 <input type="submit" value="Enviar" name="Enviar" />

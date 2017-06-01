@@ -7,9 +7,7 @@
 
   <?php
 
-    require 'config.php';
-    require 'connection_db.php';
-    require 'database.php';
+    require '/database/actions.php';
 
     $link = DBConnect();
     echo '<b>Conexão com o banco iniciada com sucesso, cabra!<br><br><br>';
@@ -48,6 +46,8 @@
 
   //  echo $delCliente;
 //fechando conexão...
+
+    verificarEmail('gabriel@email.com');
     DBClose($link);
     echo '<br><br><br>Conexão fechada com sucesso, boy!'
    ?>

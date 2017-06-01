@@ -14,29 +14,46 @@ if(isset($_POST['acao'])) {
 }
 
 function inserirUsuario(){
-  $usuario = array(
-    'nome' => $_POST['nome'],
-    'email' => $_POST['email'],
-    'idade' => $_POST['idade'],
-    'status' => $_POST['status']
-  );
+  $existe = verificarEmail($_POST['email']);
 
-  $grava = DBCreate('clientes',$usuario);
+  if ($existe == false) {
+      $usuario = array(
+        'nome' => $_POST['nome'],
+        'email' => $_POST['email'],
+        'idade' => $_POST['idade'],
+        'status' => $_POST['status'],
+        'senha' => md5($_POST['senha'])
+      );
 
-  header('Location:../index.php');
+      $grava = DBCreate('clientes',$usuario);
+
+      header('Location:../index.php');
+    }
+    else {
+      echo "email já existe";
+    }
 }
 
 function alterarUsuario(){
-  $usuario = array(
-    'nome' => $_POST['nome'],
-    'email' => $_POST['email'],
-    'idade' => $_POST['idade'],
-    'status' => $_POST['status']
-  );
+  $existe = verificarEmail($_POST['email']);
 
-  $altera = DBUpdate('clientes', $usuario, 'id='.$_POST['id']);
+  if ($existe == false) {
+      $usuario = array(
+        'nome' => $_POST['nome'],
+        'email' => $_POST['email'],
+        'idade' => $_POST['idade'],
+        'status' => $_POST['status'],
+        'senha' => md5($_POST['senha'])
+      );
 
-  header('Location:../index.php');
+      $altera = DBUpdate('clientes', $usuario, 'id='.$_POST['id']);
+
+      header('Location:../index.php');
+    }
+    else {
+      var_dump($existe);
+      echo "email já existe";
+    }
 }
 
 function excluirUsuario(){
@@ -52,6 +69,20 @@ function getUsuariosNoBanco() {
 function getUsuarioID($id) {
   $pessoa = DBRead('clientes', 'WHERE id='.$id);
   return $pessoa[0];
+}
+
+function verificarEmail($email) {
+  $existe = DBRead('clientes', 'WHERE email="'.$email.'"');
+
+  if ($existe == false or $existe[0]['email'] == $email) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function criptySenha($senha) {
+  return md5($senha);
 }
 
 function formatoData($data) {
