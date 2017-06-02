@@ -14,6 +14,9 @@ if(isset($_POST['acao'])) {
 }
 
 function inserirUsuario(){
+$permitir = verificarCamposVazios();
+if ($permitir == true) {
+
   $existe = verificarEmail($_POST['email']);
 
   if ($existe == false) {
@@ -32,9 +35,15 @@ function inserirUsuario(){
     else {
       echo "email já existe";
     }
+  } else {
+    echo "nao pode ter campo branco";
+  }
 }
 
 function alterarUsuario(){
+$permitir = verificarCamposVazios();
+if ($permitir == true) {
+
   $existe = verificarEmail($_POST['email']);
 
   if ($existe == false) {
@@ -54,6 +63,9 @@ function alterarUsuario(){
       var_dump($existe);
       echo "email já existe";
     }
+  } else {
+    echo "nao pode ter campo branco";
+  }
 }
 
 function excluirUsuario(){
@@ -69,6 +81,22 @@ function getUsuariosNoBanco() {
 function getUsuarioID($id) {
   $pessoa = DBRead('clientes', 'WHERE id='.$id);
   return $pessoa[0];
+}
+
+function verificarCamposVazios() {
+  $usuario = array(
+    'nome' => trim($_POST['nome']),
+    'email' => trim($_POST['email']),
+    'idade' => trim($_POST['idade']),
+    'status' => trim($_POST['status']),
+    'senha' => trim($_POST['senha'])
+  );
+  foreach ($usuario as $value) {
+    if ($value == "") {
+      return false;
+    }
+  }
+  return true;
 }
 
 function verificarEmail($email) {

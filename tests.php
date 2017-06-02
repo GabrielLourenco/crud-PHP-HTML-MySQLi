@@ -12,12 +12,22 @@
     $link = DBConnect();
     echo '<b>Conexão com o banco iniciada com sucesso, cabra!<br><br><br>';
 
-    // $cliente = array(
-    //   'nome' => 'Fernanda Negromonte',
-    //   'email' => 'fernanda@gmail.com',
-    //   'idade' => 12,
-    //   'status' => 0
-    // );
+    $cliente = array(
+      'nome' => trim('         Fernanda Negromonte         '),
+      'email' => trim('fernanda@gmail.com        '),
+      'idade' => '',
+      'status' => 0
+    );
+
+    foreach ($cliente as $value) {
+      if ($value == "") {
+        echo "nao pode";
+        
+      }
+      else {
+        echo "beleza\n";
+      }
+    }
     //
     // $grava = DBCreate('clientes', $cliente);
 
